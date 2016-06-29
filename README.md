@@ -8,11 +8,13 @@ This product includes GeoLite data created by MaxMind, available from
 <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
 
 # Example
-- With specified ip address:
-http://yourdomain.com/geo?ip={value}
+With specified ip address:
+- Format: http://yourdomain.com/geo?ip={value}
+- Demo: http://shouldhave.azurewebsites.net/geo?ip=139.130.4.5
 
-- With current user ip address
-http://yourdomain.com/geo
+With current user ip address:
+- Format: http://yourdomain.com/geo
+- Demo: http://shouldhave.azurewebsites.net/geo
 
 # Return Json
 ```json
