@@ -17,15 +17,15 @@ http://yourdomain.com/geo
 # Return Json
 ```json
  {
-  "id": "15865",
-  "locId": "15865",
-  "country": "SG",
-  "region": "00",
-  "city": "Singapore",
-  "postalCode": "",
-  "latitude": 1.2931,
-  "longitude": 103.8558,
-  "metroCode": "",
-  "areaCode": ""
+  "id": "string",
+  "locId": "string",
+  "country": "string",
+  "region": "string",
+  "city": "string",
+  "postalCode": "string",
+  "latitude": double,
+  "longitude": double,
+  "metroCode": "string",
+  "areaCode": "string"
 }
 ```
