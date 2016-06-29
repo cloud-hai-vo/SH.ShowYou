@@ -16,9 +16,10 @@ namespace SH.ShowYou.Controllers
                 ip = GetIpAddress();
             }
 
-            if (string.IsNullOrEmpty(ip))
+            IPAddress ipAddress;
+            if (string.IsNullOrEmpty(ip) || IPAddress.TryParse(ip, out ipAddress))
             {
-                return BadRequest();
+                return BadRequest("Invalid ip address");
             }            
 
             var geoLiteCityLocation = CsvDatabaseHelpers.GetGeoLiteCityLocation(ip);
