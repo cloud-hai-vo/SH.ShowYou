@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace SH.ShowYou.Models
 {
     public class GeoLiteCityLocationViewModel
     {
+        [JsonIgnore]
         public string Id => LocId;
 
+        [JsonIgnore]
         public string LocId { get; set; }
 
         public string Country { get; set; }

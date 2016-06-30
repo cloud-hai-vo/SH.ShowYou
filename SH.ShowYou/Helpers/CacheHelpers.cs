@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web;
+﻿using System.Runtime.Caching;
 using System.Web.Caching;
 
 namespace SH.ShowYou.Helpers
@@ -8,19 +7,20 @@ namespace SH.ShowYou.Helpers
     {
         public static void Add(string key, object value)
         {
-            HttpContext.Current.Cache.Add(key, value, null, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.High, null);
+            var cache = MemoryCache.Default;
+            CacheItemPolicy policy = new CacheItemPolicy();
+            policy.AbsoluteExpiration = Cache.NoAbsoluteExpiration;
+            cache.Add(key, value, policy);            
         }
 
-        public static bool Exist(string key)
-        {
-            return HttpContext.Current.Cache[key] != null;
-        }
+        public static bool Exist(string key) => MemoryCache.Default[key] != null;        
 
         public static T Get<T>(string key) where T : class
         {
             if (Exist(key))
             {
-                return (T)HttpContext.Current.Cache.Get(key);
+                var cache = MemoryCache.Default;
+                return (T)cache[key];
             }
 
             return default(T);

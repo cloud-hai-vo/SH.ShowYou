@@ -13,27 +13,25 @@ With specified ip address:
 ```sh 
 http://yourdomain.com/geo?ip={value} 
 ```
-- Demo: <a href="http://shouldhave.azurewebsites.net/geo?ip=139.130.4.5" target="_blank">http://shouldhave.azurewebsites.net/geo?ip=139.130.4.5</a>
+- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo?ip=139.130.4.5" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo?ip=139.130.4.5</a>
 
 With current user ip address:
 - Format: 
 ```sh
 http://yourdomain.com/geo
 ```
-- Demo: <a href="http://shouldhave.azurewebsites.net/geo" target="_blank">http://shouldhave.azurewebsites.net/geo</a>
+- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo</a>
 
 # Return Json
 ```json
  {
-  "id": "string",
-  "locId": "string",
-  "country": "string",
-  "region": "string",
-  "city": "string",
-  "postalCode": "string",
-  "latitude": double,
-  "longitude": double,
-  "metroCode": "string",
-  "areaCode": "string"
+  "country": "SG",
+  "region": "00",
+  "city": "Singapore",
+  "postalCode": "",
+  "latitude": 1.2931,
+  "longitude": 103.8558,
+  "metroCode": "",
+  "areaCode": ""
 }
 ```

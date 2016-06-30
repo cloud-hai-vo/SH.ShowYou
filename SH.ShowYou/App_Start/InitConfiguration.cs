@@ -1,4 +1,5 @@
 ﻿using SH.ShowYou.Helpers;
+using System.Threading.Tasks;
 
 namespace SH.ShowYou
 {
@@ -6,8 +7,11 @@ namespace SH.ShowYou
     {
         public static void InitDatabase()
         {
-            CsvDatabaseHelpers.GetAllGeoLiteCityBlock();
-            CsvDatabaseHelpers.GetAllGeoLiteCityLocation();
+            Task.Run(() =>
+            {
+                CsvDatabaseHelpers.GetAllGeoLiteCityBlock();
+                CsvDatabaseHelpers.GetAllGeoLiteCityLocation();
+            });
         }
     }
 }
