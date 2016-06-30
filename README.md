@@ -5,14 +5,22 @@ Lightweight and have good performance with cache.
 
 # Database
 This product includes GeoLite data created by MaxMind, available from 
-<a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+<a href="http://www.maxmind.com" target="_blank">http://www.maxmind.com</a>.
 
 # Example
-- With specified ip address:
-http://yourdomain.com/geo?ip={value}
+With specified ip address:
+- Format: 
+```sh 
+http://yourdomain.com/geo?ip={value} 
+```
+- Demo: <a href="http://shouldhave.azurewebsites.net/geo?ip=139.130.4.5" target="_blank">http://shouldhave.azurewebsites.net/geo?ip=139.130.4.5</a>
 
-- With current user ip address
+With current user ip address:
+- Format: 
+```sh
 http://yourdomain.com/geo
+```
+- Demo: <a href="http://shouldhave.azurewebsites.net/geo" target="_blank">http://shouldhave.azurewebsites.net/geo</a>
 
 # Return Json
 ```json
