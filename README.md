@@ -13,7 +13,7 @@ With specified ip address:
 ```sh 
 http://yourdomain.com/geo?ip={value} 
 ```
-- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo?ip=139.130.4.5" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo?ip=139.130.4.5</a>
+- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo?ip=74.125.130.132" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo?ip=74.125.130.132</a>
 
 With current user ip address:
 - Format: 
