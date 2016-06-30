@@ -8,10 +8,15 @@ namespace SH.ShowYou.Helpers
 {
     public class CsvDatabaseHelpers
     {
+        private static string GetPath(string fileName)
+        {
+            return $"\\CsvDatabase\\{fileName}.csv";
+        }
+
         private static List<T> ReadCsvData<T>(string fileName) where T: class
         {
             var returnvalue = new List<T>();
-            using (TextFieldParser parser = new TextFieldParser(AppDomain.CurrentDomain.BaseDirectory + $"\\CsvDatabase\\{fileName}.csv"))
+            using (TextFieldParser parser = new TextFieldParser(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName)))
             {
                 // Skip 1 line and second line.
                 parser.ReadLine();
@@ -53,16 +58,23 @@ namespace SH.ShowYou.Helpers
                 return CacheHelpers.Get<Dictionary<string, GeoLiteCityLocationViewModel>>(cacheKey);
             }
 
-            var geoLiteCityLocations = ReadCsvData<GeoLiteCityLocationViewModel>("GeoLiteCity-Location");
-
             var dic = new Dictionary<string, GeoLiteCityLocationViewModel>();
-            if (geoLiteCityLocations.Count > 0)
+            using (TextFieldParser parser = new TextFieldParser(AppDomain.CurrentDomain.BaseDirectory + GetPath("GeoLiteCity-Location")))
             {
-                geoLiteCityLocations.ForEach(p =>
+                // Skip 1 line and second line.
+                parser.ReadLine();
+                parser.ReadLine();
+                parser.SetDelimiters(",");
+                while (!parser.EndOfData)
                 {
-                    dic.Add(p.Id, p);
-                });
+                    var parts = parser.ReadFields();
+                    var geoLiteCity = new GeoLiteCityLocationViewModel(parts);
+                    dic.Add(geoLiteCity.Id, geoLiteCity);
+                }
+            }
 
+            if (dic.Count > 0)
+            {
                 CacheHelpers.Add(cacheKey, dic);
             }
 
