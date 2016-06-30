@@ -17,12 +17,16 @@ namespace SH.ShowYou.Controllers
             }
 
             IPAddress ipAddress;
-            if (string.IsNullOrEmpty(ip) || IPAddress.TryParse(ip, out ipAddress))
+            if (string.IsNullOrEmpty(ip) || !IPAddress.TryParse(ip, out ipAddress))
             {
                 return BadRequest("Invalid ip address");
             }            
 
             var geoLiteCityLocation = CsvDatabaseHelpers.GetGeoLiteCityLocation(ip);
+            if(geoLiteCityLocation == null)
+            {
+                return BadRequest("Invalid ip address");
+            }
 
             return Ok(geoLiteCityLocation);
         }
