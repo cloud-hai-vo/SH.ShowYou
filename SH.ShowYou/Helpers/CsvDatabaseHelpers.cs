@@ -2,6 +2,7 @@
 using SH.ShowYou.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace SH.ShowYou.Helpers
@@ -16,18 +17,39 @@ namespace SH.ShowYou.Helpers
         private static List<T> ReadCsvData<T>(string fileName) where T: class
         {
             var returnvalue = new List<T>();
-            using (TextFieldParser parser = new TextFieldParser(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName)))
+            var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName));            
+            // Set offset value per fetch.
+            var offset = 0;
+            var size = 200000;
+            var total = lines.Count();
+            if (total > 2)
             {
                 // Skip 1 line and second line.
-                parser.ReadLine();
-                parser.ReadLine();
-                parser.SetDelimiters(",");
-                while (!parser.EndOfData)
+                offset = 2;
+                total -= 2;
+                while (total > 0)
                 {
-                    var parts = parser.ReadFields();
-                    returnvalue.Add((T)Activator.CreateInstance(typeof(T), new object[] { parts }));
-                }
-            }          
+                    string[] linesData;
+                    if(total > size)
+                    {
+                        linesData = lines.Skip(offset).Take(size).ToArray();
+                        total -= size;
+                        offset += size;                        
+                    }
+                    else
+                    {
+                        linesData = lines.Skip(offset).Take(total).ToArray();
+                        total -= linesData.Length;
+                        offset += linesData.Length;                        
+                    }
+
+                    for (int i = linesData.Length -1; i >= 0; i--)
+                    {
+                        var parts = linesData[i].Split(new char[] { ',' }, StringSplitOptions.None);
+                        returnvalue.Add((T)Activator.CreateInstance(typeof(T), new object[] { parts }));
+                    }                    
+                }                
+            }           
 
             return returnvalue;
         }

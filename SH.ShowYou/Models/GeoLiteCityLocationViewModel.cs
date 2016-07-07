@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace SH.ShowYou.Models
 {
@@ -29,6 +30,7 @@ namespace SH.ShowYou.Models
 
         public GeoLiteCityLocationViewModel(string[] parts)
         {
+            parts = parts.Select(p => p.Replace("\"", string.Empty)).ToArray();
             LocId = parts[0];
             Country = parts[1];
             Region = parts[2];
