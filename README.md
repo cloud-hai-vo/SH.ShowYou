@@ -13,14 +13,14 @@ With specified ip address:
 ```sh 
 http://yourdomain.com/geo?ip={value} 
 ```
-- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo?ip=74.125.130.132" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo?ip=74.125.130.132</a>
+- Demo: <a href="http://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132" target="_blank">http://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132</a>
 
 With current user ip address:
 - Format: 
 ```sh
 http://yourdomain.com/geo
 ```
-- Demo: <a href="http://shouldhave-showyou.azurewebsites.net//geo" target="_blank">http://shouldhave-showyou.azurewebsites.net//geo</a>
+- Demo: <a href="http://shouldhave-showyou.azurewebsites.net/geo" target="_blank">http://shouldhave-showyou.azurewebsites.net/geo</a>
 
 # Return Json
 ```json
