@@ -14,13 +14,12 @@ namespace SH.ShowYou.Helpers
             return $"\\CsvDatabase\\{fileName}.csv";
         }
 
-        private static List<T> ReadCsvData<T>(string fileName) where T: class
+        private static IEnumerable<T> ReadCsvData<T>(string fileName) where T : class
         {
-            var returnvalue = new List<T>();
-            var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName));            
+            var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName));
             // Set offset value per fetch.
             var offset = 0;
-            var size = 200000;
+            var size = 300000;
             var total = lines.Count();
             if (total > 2)
             {
@@ -30,28 +29,31 @@ namespace SH.ShowYou.Helpers
                 while (total > 0)
                 {
                     string[] linesData;
-                    if(total > size)
+                    if (total > size)
                     {
                         linesData = lines.Skip(offset).Take(size).ToArray();
                         total -= size;
-                        offset += size;                        
+                        offset += size;
                     }
                     else
                     {
                         linesData = lines.Skip(offset).Take(total).ToArray();
                         total -= linesData.Length;
-                        offset += linesData.Length;                        
+                        offset += linesData.Length;
                     }
 
-                    for (int i = linesData.Length -1; i >= 0; i--)
+                    using (TextFieldParser parser = new TextFieldParser(new StringReader(string.Join(Environment.NewLine, linesData))))
                     {
-                        var parts = linesData[i].Split(new char[] { ',' }, StringSplitOptions.None);
-                        returnvalue.Add((T)Activator.CreateInstance(typeof(T), new object[] { parts }));
-                    }                    
-                }                
-            }           
-
-            return returnvalue;
+                        parser.SetDelimiters(",");
+                        while (!parser.EndOfData)
+                        {
+                            var parts = parser.ReadFields();
+                            var value = (T)Activator.CreateInstance(typeof(T), new object[] { parts });
+                            yield return value;
+                        }
+                    }
+                }
+            }
         }
 
         public static List<GeoLiteCityBlockViewModel> GetAllGeoLiteCityBlock()
@@ -62,7 +64,11 @@ namespace SH.ShowYou.Helpers
                 return CacheHelpers.Get<List<GeoLiteCityBlockViewModel>>(cacheKey);
             }
 
-            var geoLiteCityBlocks = ReadCsvData<GeoLiteCityBlockViewModel>("GeoLiteCity-Blocks");
+            var geoLiteCityBlocks = new List<GeoLiteCityBlockViewModel>();
+            foreach (var item in ReadCsvData<GeoLiteCityBlockViewModel>("GeoLiteCity-Blocks"))
+            {
+                geoLiteCityBlocks.Add(item);
+            }
 
             if (geoLiteCityBlocks.Count > 0)
             {
@@ -81,18 +87,9 @@ namespace SH.ShowYou.Helpers
             }
 
             var dic = new Dictionary<string, GeoLiteCityLocationViewModel>();
-            using (TextFieldParser parser = new TextFieldParser(AppDomain.CurrentDomain.BaseDirectory + GetPath("GeoLiteCity-Location")))
+            foreach (var item in ReadCsvData<GeoLiteCityLocationViewModel>("GeoLiteCity-Location"))
             {
-                // Skip 1 line and second line.
-                parser.ReadLine();
-                parser.ReadLine();
-                parser.SetDelimiters(",");
-                while (!parser.EndOfData)
-                {
-                    var parts = parser.ReadFields();
-                    var geoLiteCity = new GeoLiteCityLocationViewModel(parts);
-                    dic.Add(geoLiteCity.Id, geoLiteCity);
-                }
+                dic.Add(item.Id, item);
             }
 
             if (dic.Count > 0)
@@ -107,7 +104,7 @@ namespace SH.ShowYou.Helpers
         {
             var ipInteger = IpHelpers.ConvertToInt(ipAddress);
             var geoLiteBlock = GetAllGeoLiteCityBlock().FirstOrDefault(p => p.StartIpNum <= ipInteger && p.EndIpNum >= ipInteger);
-            if(geoLiteBlock == null)
+            if (geoLiteBlock == null)
             {
                 return null;
             }

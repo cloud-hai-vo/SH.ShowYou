@@ -10,6 +10,10 @@ namespace SH.ShowYou
             Task.Run(() =>
             {
                 CsvDatabaseHelpers.GetAllGeoLiteCityBlock();
+            });
+
+            Task.Run(() =>
+            {
                 CsvDatabaseHelpers.GetAllGeoLiteCityLocation();
             });
         }
