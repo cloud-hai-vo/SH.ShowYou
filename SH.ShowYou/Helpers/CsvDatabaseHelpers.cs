@@ -14,12 +14,12 @@ namespace SH.ShowYou.Helpers
             return $"\\CsvDatabase\\{fileName}.csv";
         }
 
-        private static IEnumerable<T> ReadCsvData<T>(string fileName) where T : class
+        private static IEnumerable<IEnumerable<T>> ReadCsvData<T>(string fileName) where T : class
         {
             var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName));
             // Set offset value per fetch.
             var offset = 0;
-            var size = 300000;
+            var size = 200000;
             var total = lines.Count();
             if (total > 2)
             {
@@ -42,6 +42,7 @@ namespace SH.ShowYou.Helpers
                         offset += linesData.Length;
                     }
 
+                    var returnValues = new List<T>();
                     using (TextFieldParser parser = new TextFieldParser(new StringReader(string.Join(Environment.NewLine, linesData))))
                     {
                         parser.SetDelimiters(",");
@@ -49,9 +50,14 @@ namespace SH.ShowYou.Helpers
                         {
                             var parts = parser.ReadFields();
                             var value = (T)Activator.CreateInstance(typeof(T), new object[] { parts });
-                            yield return value;
+                            returnValues.Add(value);                            
                         }
                     }
+
+                    if(returnValues.Count > 0)
+                    {
+                        yield return returnValues;
+                    }                    
                 }
             }
         }
@@ -65,9 +71,9 @@ namespace SH.ShowYou.Helpers
             }
 
             var geoLiteCityBlocks = new List<GeoLiteCityBlockViewModel>();
-            foreach (var item in ReadCsvData<GeoLiteCityBlockViewModel>("GeoLiteCity-Blocks"))
+            foreach (var items in ReadCsvData<GeoLiteCityBlockViewModel>("GeoLiteCity-Blocks"))
             {
-                geoLiteCityBlocks.Add(item);
+                geoLiteCityBlocks.AddRange(items);
             }
 
             if (geoLiteCityBlocks.Count > 0)
@@ -87,9 +93,12 @@ namespace SH.ShowYou.Helpers
             }
 
             var dic = new Dictionary<string, GeoLiteCityLocationViewModel>();
-            foreach (var item in ReadCsvData<GeoLiteCityLocationViewModel>("GeoLiteCity-Location"))
+            foreach (var items in ReadCsvData<GeoLiteCityLocationViewModel>("GeoLiteCity-Location"))
             {
-                dic.Add(item.Id, item);
+                foreach (var item in items)
+                {
+                    dic.Add(item.Id, item);
+                }
             }
 
             if (dic.Count > 0)
