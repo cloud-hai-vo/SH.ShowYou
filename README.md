@@ -7,6 +7,8 @@ Lightweight and have good performance with cache.
 This product includes GeoLite data created by MaxMind, available from 
 <a href="http://www.maxmind.com" target="_blank">http://www.maxmind.com</a>.
 
+Update new database: download new Geolite data from MaxMind and copy and override at CsvDatabase folder. (Keep the name of files as same as files in CsvDatabase folders.)
+
 # Example
 With specified ip address:
 - Format: 
