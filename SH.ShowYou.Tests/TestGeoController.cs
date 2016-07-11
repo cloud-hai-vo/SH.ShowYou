@@ -2,7 +2,9 @@
 using SH.ShowYou.Controllers;
 using SH.ShowYou.Helpers;
 using SH.ShowYou.Models;
+using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Http.Results;
@@ -36,6 +38,22 @@ namespace SH.ShowYou.Tests
             var ipAddress = "52.163.209.255";
             var ipInteger = IpHelpers.ConvertToInt(ipAddress);
             Assert.AreEqual(ipInteger, 883151359);
+        }
+
+        [TestMethod]
+        public void ReadCsvData_GeoLiteCityBlockIsCorrectLoad()
+        {
+            var geoLiteBlock = CsvDatabaseHelpers.GetAllGeoLiteCityBlock();
+            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\CsvDatabase\\GeoLiteCity-Blocks.csv").Count() - 2;
+            Assert.AreEqual(fileCount, geoLiteBlock.Count);
+        }
+
+        [TestMethod]
+        public void ReadCsvData_GeoLiteLocationisCorrectLoad()
+        {
+            var geoLiteLocation = CsvDatabaseHelpers.GetAllGeoLiteCityLocation();
+            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\CsvDatabase\\GeoLiteCity-Location.csv").Count() - 2;
+            Assert.AreEqual(fileCount, geoLiteLocation.Count);
         }
     }
 }
