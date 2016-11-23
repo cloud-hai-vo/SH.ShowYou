@@ -28,6 +28,8 @@ namespace SH.ShowYou.Controllers
                 return BadRequest("Invalid ip address");
             }
 
+            geoLiteCityLocation.Ip = ip;
+
             return Ok(geoLiteCityLocation);
         }
     }

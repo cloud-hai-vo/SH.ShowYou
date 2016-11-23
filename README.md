@@ -27,6 +27,7 @@ http://yourdomain.com/geo
 # Return Json
 ```json
  {
+  "ip": "74.125.130.132",
   "country": "SG",
   "region": "00",
   "city": "Singapore",
