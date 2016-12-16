@@ -9,6 +9,12 @@ This product includes GeoLite data created by MaxMind, available from
 
 Update new database: download new Geolite data from MaxMind and copy and override at CsvDatabase folder. (Keep the name of files as same as files in CsvDatabase folders.)
 
+# Configuration
+We can change configuration for Csv Database files or Binary database files
+```json
+ <add key="shsu:UseMaxMindDb" value="true"/>
+```
+
 # Example
 With specified ip address:
 - Format: 
