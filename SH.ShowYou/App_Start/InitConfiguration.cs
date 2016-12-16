@@ -7,15 +7,18 @@ namespace SH.ShowYou
     {
         public static void InitDatabase()
         {
-            Task.Run(() =>
+            if (!ConfigHelper.UseMaxMindDb())
             {
-                CsvDatabaseHelpers.GetAllGeoLiteCityBlock();
-            });
+                Task.Run(() =>
+                {
+                    CsvDatabaseHelper.GetAllGeoLiteCityBlock();
+                });
 
-            Task.Run(() =>
-            {
-                CsvDatabaseHelpers.GetAllGeoLiteCityLocation();
-            });
+                Task.Run(() =>
+                {
+                    CsvDatabaseHelper.GetAllGeoLiteCityLocation();
+                });
+            }
         }
     }
 }
