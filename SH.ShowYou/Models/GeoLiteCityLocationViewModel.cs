@@ -28,7 +28,12 @@ namespace SH.ShowYou.Models
 
         public string MetroCode { get; set; }
 
-        public string AreaCode { get; set; }        
+        public string AreaCode { get; set; }  
+        
+        public GeoLiteCityLocationViewModel()
+        {
+
+        }
 
         public GeoLiteCityLocationViewModel(string[] parts)
         {

@@ -2,6 +2,7 @@
 using System.Web.Routing;
 using SH.ShowYou.Helpers;
 using System.Net;
+using SH.ShowYou.Models;
 
 namespace SH.ShowYou.Controllers
 {
@@ -20,10 +21,19 @@ namespace SH.ShowYou.Controllers
             if (string.IsNullOrEmpty(ip) || !IPAddress.TryParse(ip, out ipAddress))
             {
                 return BadRequest("Invalid ip address");
-            }            
+            }
 
-            var geoLiteCityLocation = CsvDatabaseHelpers.GetGeoLiteCityLocation(ip);
-            if(geoLiteCityLocation == null)
+            GeoLiteCityLocationViewModel geoLiteCityLocation = null;
+            if (ConfigHelper.UseMaxMindDb())
+            {
+                geoLiteCityLocation = MaxMindDatabaseHelper.GetGeoLiteCityLocation(ipAddress);
+            }
+            else
+            {
+                geoLiteCityLocation = CsvDatabaseHelper.GetGeoLiteCityLocation(ip);
+            }
+
+            if (geoLiteCityLocation == null)
             {
                 return BadRequest("Invalid ip address");
             }
