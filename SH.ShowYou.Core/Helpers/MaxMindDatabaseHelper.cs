@@ -1,10 +1,10 @@
 ﻿using MaxMind.Db;
-using SH.ShowYou.Models;
+using SH.ShowYou.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace SH.ShowYou.Helpers
+namespace SH.ShowYou.Core.Helpers
 {
     public class MaxMindDatabaseHelper
     {

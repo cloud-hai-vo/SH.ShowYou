@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualBasic.FileIO;
-using SH.ShowYou.Models;
+using SH.ShowYou.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SH.ShowYou.Helpers
+namespace SH.ShowYou.Core.Helpers
 {
     public class CsvDatabaseHelper
     {

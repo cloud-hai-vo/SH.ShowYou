@@ -67,6 +67,10 @@
     <Compile Include="TestGeoController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SH.ShowYou.Core\SH.ShowYou.Core.csproj">
+      <Project>{d4e15184-23e5-4e4d-bb77-5056e10eb9ad}</Project>
+      <Name>SH.ShowYou.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SH.ShowYou\SH.ShowYou.csproj">
       <Project>{B4EE65C2-FF19-477B-B51C-94467077E540}</Project>
       <Name>SH.ShowYou</Name>

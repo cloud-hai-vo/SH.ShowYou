@@ -1,8 +1,9 @@
 ﻿using System.Web.Http;
 using System.Web.Routing;
-using SH.ShowYou.Helpers;
 using System.Net;
-using SH.ShowYou.Models;
+using SH.ShowYou.Core.Models;
+using SH.ShowYou.Core.Helpers;
+using SH.ShowYou.Helpers;
 
 namespace SH.ShowYou.Controllers
 {
@@ -18,7 +19,6 @@ namespace SH.ShowYou.Controllers
             }
 
             ip = RemovePort(ip);
-
 
             IPAddress ipAddress;
             if (string.IsNullOrEmpty(ip) || !IPAddress.TryParse(ip, out ipAddress))
