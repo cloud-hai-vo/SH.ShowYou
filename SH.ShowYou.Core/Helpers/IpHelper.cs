@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SH.ShowYou.Helpers
+namespace SH.ShowYou.Core.Helpers
 {
     public class IpHelper
     {

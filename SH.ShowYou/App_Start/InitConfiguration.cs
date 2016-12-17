@@ -1,4 +1,5 @@
-﻿using SH.ShowYou.Helpers;
+﻿using SH.ShowYou.Core.Helpers;
+using SH.ShowYou.Helpers;
 using System.Threading.Tasks;
 
 namespace SH.ShowYou

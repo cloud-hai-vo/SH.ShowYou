@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Caching;
 using System.Web.Caching;
 
-namespace SH.ShowYou.Helpers
+namespace SH.ShowYou.Core.Helpers
 {
     public class CacheHelper
     {

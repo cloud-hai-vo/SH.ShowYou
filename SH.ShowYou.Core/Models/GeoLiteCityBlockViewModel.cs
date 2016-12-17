@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SH.ShowYou.Models
+namespace SH.ShowYou.Core.Models
 {
     public class GeoLiteCityBlockViewModel
     {
