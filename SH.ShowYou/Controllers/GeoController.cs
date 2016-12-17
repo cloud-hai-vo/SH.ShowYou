@@ -17,6 +17,9 @@ namespace SH.ShowYou.Controllers
                 ip = GetIpAddress();
             }
 
+            ip = RemovePort(ip);
+
+
             IPAddress ipAddress;
             if (string.IsNullOrEmpty(ip) || !IPAddress.TryParse(ip, out ipAddress))
             {
