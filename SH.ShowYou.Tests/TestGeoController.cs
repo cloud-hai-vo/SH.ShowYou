@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SH.ShowYou.Controllers;
-using SH.ShowYou.Helpers;
-using SH.ShowYou.Models;
+using SH.ShowYou.Core.Helpers;
+using SH.ShowYou.Core.Models;
 using System;
 using System.Configuration;
 using System.IO;

@@ -100,13 +100,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
-    <Compile Include="Helpers\MaxMindDatabaseHelper.cs" />
-    <Compile Include="Helpers\CsvDatabaseHelper.cs" />
-    <Compile Include="Helpers\IpHelper.cs" />
-    <Compile Include="Models\GeoLiteCityLocationViewModel.cs" />
-    <Compile Include="Models\GeoLiteCityBlockViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SH.ShowYou.Core\SH.ShowYou.Core.csproj">
+      <Project>{d4e15184-23e5-4e4d-bb77-5056e10eb9ad}</Project>
+      <Name>SH.ShowYou.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
