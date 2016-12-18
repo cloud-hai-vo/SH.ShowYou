@@ -14,6 +14,12 @@ Update new database: download new Geolite data from MaxMind and copy and overrid
 Install-Package SH.ShowYou.Core 
 ```
 
+Download Maxmind database and put in 
+```sh 
+GeoDatabases\BinaryDatabase
+GeoDatabases\CsvDatabase
+```
+
 - Get Geo with CSV Database
 <pre><code class='language-cs'>
 CsvDatabaseHelper.GetGeoLiteCityLocation(ip);

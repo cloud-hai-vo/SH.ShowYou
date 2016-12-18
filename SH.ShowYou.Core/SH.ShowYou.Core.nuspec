@@ -11,6 +11,7 @@
       Get geographic (latitude, longitude) with current IP of request.
       Lightweight and have good performance with cache.
     </description>
+    <releaseNotes>Remove include Maxmind database file in Package</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>MaxMind geographic latitude longitude ip</tags>
     <dependencies>
@@ -21,7 +22,7 @@
       <file include="..\SH.ShowYou\GeoDatabases\**\*" target="content\GeoDatabases" />      
     </contentFiles>-->
   </metadata>
-  <files>
+  <!--<files>
     <file src="..\SH.ShowYou\GeoDatabases\**\*" target="content\GeoDatabases"></file>
-  </files>
+  </files>-->
 </package>
