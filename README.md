@@ -15,14 +15,14 @@ Install-Package SH.ShowYou.Core
 ```
 
 - Get Geo with CSV Database
-```sh 
+<pre><code class='language-cs'>
 CsvDatabaseHelper.GetGeoLiteCityLocation(ip);
-```
+</code></pre>
 
 - Get Geo with Binary Database
-```sh 
+<pre><code class='language-cs'>
 MaxMindDatabaseHelper.GetGeoLiteCityLocation(ipAddress)
-```
+</code></pre>
 
 # Configuration
 We can change configuration for Csv Database files or Binary database files (Only in Api App)
