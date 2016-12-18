@@ -1,0 +1,1 @@
+nuget.exe pack SH.ShowYou.Core
