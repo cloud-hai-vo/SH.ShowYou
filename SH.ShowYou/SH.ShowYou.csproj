@@ -105,10 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="CsvDatabase\GeoLiteCity-Blocks.csv" />
-    <Content Include="CsvDatabase\GeoLiteCity-Location.csv" />
-    <Content Include="BinaryDatabase\GeoLite2-City.mmdb" />
-    <Content Include="BinaryDatabase\GeoLite2-Country.mmdb" />
+    <Content Include="GeoDatabases\CsvDatabase\GeoLiteCity-Blocks.csv" />
+    <Content Include="GeoDatabases\CsvDatabase\GeoLiteCity-Location.csv" />
+    <Content Include="GeoDatabases\BinaryDatabase\GeoLite2-City.mmdb" />
+    <Content Include="GeoDatabases\BinaryDatabase\GeoLite2-Country.mmdb" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

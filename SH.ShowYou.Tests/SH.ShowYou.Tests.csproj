@@ -77,24 +77,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CsvDatabase\GeoLiteCity-Blocks.csv">
+    <Content Include="GeoDatabases\CsvDatabase\GeoLiteCity-Blocks.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CsvDatabase\GeoLiteCity-Location.csv">
+    <Content Include="GeoDatabases\CsvDatabase\GeoLiteCity-Location.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="App.config" />
-    <Content Include="BinaryDatabase\GeoLite2-City.mmdb">
+    <Content Include="GeoDatabases\BinaryDatabase\GeoLite2-City.mmdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BinaryDatabase\GeoLite2-Country.mmdb">
+    <Content Include="GeoDatabases\BinaryDatabase\GeoLite2-Country.mmdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MockServices\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

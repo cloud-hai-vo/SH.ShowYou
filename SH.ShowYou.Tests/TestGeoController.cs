@@ -72,7 +72,7 @@ namespace SH.ShowYou.Tests
             var controller = new GeoController();            
             var geoResult = controller.Get("52.163.209.255") as OkNegotiatedContentResult<GeoLiteCityLocationViewModel>;
             Assert.IsNotNull(geoResult);
-            Assert.AreEqual(geoResult.Content.Latitude, 1.2854999999999999);
+            Assert.AreEqual(geoResult.Content.Latitude, 1.2855);
             Assert.AreEqual(geoResult.Content.Longitude, 103.8565);
         }
 
@@ -88,7 +88,7 @@ namespace SH.ShowYou.Tests
         public void ReadCsvData_GeoLiteCityBlockIsCorrectLoad()
         {
             var geoLiteBlock = CsvDatabaseHelper.GetAllGeoLiteCityBlock();
-            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\CsvDatabase\\GeoLiteCity-Blocks.csv").Count() - 2;
+            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\GeoDatabases\\CsvDatabase\\GeoLiteCity-Blocks.csv").Count() - 2;
             Assert.AreEqual(fileCount, geoLiteBlock.Count);
         }
 
@@ -96,7 +96,7 @@ namespace SH.ShowYou.Tests
         public void ReadCsvData_GeoLiteLocationisCorrectLoad()
         {
             var geoLiteLocation = CsvDatabaseHelper.GetAllGeoLiteCityLocation();
-            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\CsvDatabase\\GeoLiteCity-Location.csv").Count() - 2;
+            var fileCount = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + "\\GeoDatabases\\CsvDatabase\\GeoLiteCity-Location.csv").Count() - 2;
             Assert.AreEqual(fileCount, geoLiteLocation.Count);
         }
     }

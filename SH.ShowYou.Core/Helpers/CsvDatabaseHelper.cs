@@ -11,7 +11,7 @@ namespace SH.ShowYou.Core.Helpers
     {
         private static string GetPath(string fileName)
         {
-            return $"\\CsvDatabase\\{fileName}.csv";
+            return $"\\GeoDatabases\\CsvDatabase\\{fileName}.csv";
         }
 
         private static IEnumerable<IEnumerable<T>> ReadCsvData<T>(string fileName) where T : class

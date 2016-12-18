@@ -9,8 +9,23 @@ This product includes GeoLite data created by MaxMind, available from
 
 Update new database: download new Geolite data from MaxMind and copy and override at CsvDatabase folder. (Keep the name of files as same as files in CsvDatabase folders.)
 
+# Nuget
+```sh 
+Install-Package SH.ShowYou.Core 
+```
+
+- Get Geo with CSV Database
+<pre><code class='language-cs'>
+CsvDatabaseHelper.GetGeoLiteCityLocation(ip);
+</code></pre>
+
+- Get Geo with Binary Database
+<pre><code class='language-cs'>
+MaxMindDatabaseHelper.GetGeoLiteCityLocation(ipAddress)
+</code></pre>
+
 # Configuration
-We can change configuration for Csv Database files or Binary database files
+We can change configuration for Csv Database files or Binary database files (Only in Api App)
 ```json
  <add key="shsu:UseMaxMindDb" value="true"/>
 ```
