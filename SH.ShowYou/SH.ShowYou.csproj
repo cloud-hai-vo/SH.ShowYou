@@ -96,6 +96,7 @@
     <Compile Include="App_Start\InitConfiguration.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
+    <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Controllers\GeoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
