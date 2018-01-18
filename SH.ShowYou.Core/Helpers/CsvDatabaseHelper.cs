@@ -11,21 +11,20 @@ namespace SH.ShowYou.Core.Helpers
     {
         private static string GetPath(string fileName)
         {
-            return $"\\GeoDatabases\\CsvDatabase\\{fileName}.csv";
+            return $"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\CsvDatabase\\{fileName}.csv";
         }
 
-        private static IEnumerable<IEnumerable<T>> ReadCsvData<T>(string fileName) where T : class
+        public static IEnumerable<IEnumerable<T>> ReadCsvData<T>(string path, int skipLine = 0) where T : class
         {
-            var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + GetPath(fileName));
+            var lines = File.ReadLines(path);
             // Set offset value per fetch.
             var offset = 0;
             var size = 200000;
             var total = lines.Count();
             if (total > 2)
             {
-                // Skip 1 line and second line.
-                offset = 2;
-                total -= 2;
+                offset += skipLine;
+                total -= offset;
                 while (total > 0)
                 {
                     string[] linesData;
@@ -50,14 +49,14 @@ namespace SH.ShowYou.Core.Helpers
                         {
                             var parts = parser.ReadFields();
                             var value = (T)Activator.CreateInstance(typeof(T), new object[] { parts });
-                            returnValues.Add(value);                            
+                            returnValues.Add(value);
                         }
                     }
 
-                    if(returnValues.Count > 0)
+                    if (returnValues.Count > 0)
                     {
                         yield return returnValues;
-                    }                    
+                    }
                 }
             }
         }
@@ -71,7 +70,7 @@ namespace SH.ShowYou.Core.Helpers
             }
 
             var geoLiteCityBlocks = new List<GeoLiteCityBlockViewModel>();
-            foreach (var items in ReadCsvData<GeoLiteCityBlockViewModel>("GeoLiteCity-Blocks"))
+            foreach (var items in ReadCsvData<GeoLiteCityBlockViewModel>(GetPath("GeoLiteCity-Blocks"), 2))
             {
                 geoLiteCityBlocks.AddRange(items);
             }
@@ -93,7 +92,7 @@ namespace SH.ShowYou.Core.Helpers
             }
 
             var dic = new Dictionary<string, GeoLiteCityLocationViewModel>();
-            foreach (var items in ReadCsvData<GeoLiteCityLocationViewModel>("GeoLiteCity-Location"))
+            foreach (var items in ReadCsvData<GeoLiteCityLocationViewModel>(GetPath("GeoLiteCity-Location"), 2))
             {
                 foreach (var item in items)
                 {
