@@ -42,7 +42,7 @@ With specified ip address:
 ```sh 
 http://yourdomain.com/geo?ip={value} 
 ```
-- Demo: <a href="https://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132" target="_blank">https://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132</a>
+~~- Demo: <a href="https://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132" target="_blank">https://shouldhave-showyou.azurewebsites.net/geo?ip=74.125.130.132</a>~~
 
 With current user ip address:
 - Format: 
