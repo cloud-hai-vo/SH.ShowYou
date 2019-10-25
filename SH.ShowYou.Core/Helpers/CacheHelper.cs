@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Caching;
-using System.Web.Caching;
 
 namespace SH.ShowYou.Core.Helpers
 {
@@ -8,12 +7,15 @@ namespace SH.ShowYou.Core.Helpers
         public static void Add(string key, object value)
         {
             var cache = MemoryCache.Default;
-            CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = Cache.NoAbsoluteExpiration;
-            cache.Add(key, value, policy);            
+            CacheItemPolicy policy = new CacheItemPolicy
+            {
+                Priority = CacheItemPriority.NotRemovable
+            };
+
+            cache.Add(key, value, policy);
         }
 
-        public static bool Exist(string key) => MemoryCache.Default[key] != null;        
+        public static bool Exist(string key) => MemoryCache.Default[key] != null;
 
         public static T Get<T>(string key) where T : class
         {

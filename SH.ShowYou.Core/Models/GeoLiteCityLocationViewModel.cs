@@ -1,18 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Linq;
+﻿using CsvHelper.Configuration.Attributes;
+using Newtonsoft.Json;
 
 namespace SH.ShowYou.Core.Models
 {
     public class GeoLiteCityLocationViewModel
     {
         [JsonIgnore]
-        public string Id => LocId;
-
-        [JsonIgnore]
         public string LocId { get; set; }
-
-        public string Ip { get; set; }
 
         public string Country { get; set; }
 
@@ -28,24 +22,13 @@ namespace SH.ShowYou.Core.Models
 
         public string MetroCode { get; set; }
 
-        public string AreaCode { get; set; }  
-        
-        public GeoLiteCityLocationViewModel()
-        {
+        public string AreaCode { get; set; }
 
-        }
+        [JsonIgnore]
+        [Ignore]
+        public string Id => LocId;
 
-        public GeoLiteCityLocationViewModel(string[] parts)
-        {
-            LocId = parts[0];
-            Country = parts[1];
-            Region = parts[2];
-            City = parts[3];
-            PostalCode = parts[4];
-            Latitude = Convert.ToDouble(parts[5]);
-            Longitude = Convert.ToDouble(parts[6]);
-            MetroCode = parts[7];
-            AreaCode = parts[8];
-        }
+        [Ignore]
+        public string Ip { get; set; }
     }
 }
