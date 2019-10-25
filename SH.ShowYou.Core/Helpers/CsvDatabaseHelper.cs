@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using CsvHelper;
 using SH.ShowYou.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -41,21 +41,10 @@ namespace SH.ShowYou.Core.Helpers
                         offset += linesData.Length;
                     }
 
-                    var returnValues = new List<T>();
-                    using (TextFieldParser parser = new TextFieldParser(new StringReader(string.Join(Environment.NewLine, linesData))))
+                    using (CsvReader reader = new CsvReader(new StringReader(string.Join(Environment.NewLine, linesData))))
                     {
-                        parser.SetDelimiters(",");
-                        while (!parser.EndOfData)
-                        {
-                            var parts = parser.ReadFields();
-                            var value = (T)Activator.CreateInstance(typeof(T), new object[] { parts });
-                            returnValues.Add(value);
-                        }
-                    }
-
-                    if (returnValues.Count > 0)
-                    {
-                        yield return returnValues;
+                        reader.Configuration.HasHeaderRecord = false;
+                        yield return reader.GetRecords<T>();
                     }
                 }
             }

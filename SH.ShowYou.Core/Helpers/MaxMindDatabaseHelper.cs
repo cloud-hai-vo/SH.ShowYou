@@ -8,7 +8,7 @@ namespace SH.ShowYou.Core.Helpers
 {
     public class MaxMindDatabaseHelper
     {
-        private static Reader GeoCityReader = new Reader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-City.mmdb");
+        private static readonly Reader GeoCityReader = new Reader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-City.mmdb");
 
         // For now we don't need it.
         //private static Reader GeoCountryReader = new Reader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-Country.mmdb");
