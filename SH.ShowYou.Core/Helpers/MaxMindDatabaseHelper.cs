@@ -1,4 +1,6 @@
 ﻿using MaxMind.Db;
+using MaxMind.GeoIP2;
+using MaxMind.GeoIP2.Responses;
 using SH.ShowYou.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,8 @@ namespace SH.ShowYou.Core.Helpers
     public class MaxMindDatabaseHelper
     {
         private static readonly Reader GeoCityReader = new Reader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-City.mmdb");
+        private static readonly DatabaseReader _anonymousProvider = new DatabaseReader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-City.mmdb", FileAccessMode.MemoryMapped);
 
-        // For now we don't need it.
-        //private static Reader GeoCountryReader = new Reader($"{AppDomain.CurrentDomain.BaseDirectory}\\GeoDatabases\\BinaryDatabase\\GeoLite2-Country.mmdb");
 
         public static GeoLiteCityLocationViewModel GetGeoLiteCityLocation(IPAddress ipAddress)
         {
@@ -26,8 +27,30 @@ namespace SH.ShowYou.Core.Helpers
             geo.Longitude = Convert.ToDouble(GetValue(dic, "location", "longitude"));
             geo.MetroCode = string.Empty;
             geo.AreaCode = string.Empty;
+            geo.IsAnonymousIP = CheckAnonymousIP(ipAddress);
 
             return geo;
+        }
+
+        private static bool CheckAnonymousIP(IPAddress ipAddress)
+        {
+            try
+            {
+                if (_anonymousProvider.TryAnonymousIP(ipAddress, out AnonymousIPResponse response))
+                {
+                    return response.IsAnonymous
+                        || response.IsAnonymousVpn
+                        || response.IsHostingProvider
+                        || response.IsPublicProxy
+                        || response.IsTorExitNode;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return true;
+            }
         }
 
         private static string GetValue(Dictionary<string, object> geoCity, params string[] keys)
@@ -53,7 +76,7 @@ namespace SH.ShowYou.Core.Helpers
                         }
                     }
                 }
-            }            
+            }
 
             return value;
         }

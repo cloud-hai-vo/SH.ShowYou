@@ -30,5 +30,8 @@ namespace SH.ShowYou.Core.Models
 
         [Ignore]
         public string Ip { get; set; }
+        
+        [Ignore]
+        public bool IsAnonymousIP { get; set; }
     }
 }
